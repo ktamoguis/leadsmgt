@@ -5,5 +5,8 @@
   <%= f.password_field :password %><br>
   <label>Manager:</label>
   <%= f.check_box :manager %><br>
+  <%= f.fields_for :user, @agent.build_region do |region_fields| %>
+    <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => true %><br>
+  <% end %>
   <%= f.submit %>
 <% end %>
