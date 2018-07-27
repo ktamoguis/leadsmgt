@@ -5,11 +5,9 @@ class AgentsController < ApplicationController
   end
 
   def create
-    binding.pry
     @agent = Agent.new(agent_params)
     @agent.save
     set_session
-    binding.pry
     redirect_to agent_path(@agent)
   end
 

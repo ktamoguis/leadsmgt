@@ -1,10 +1,11 @@
 class SessionsController < ApplicationController
 
   def new
-    @agents = Agents.all
+    @agent = Agent.new
   end
 
   def create
+    binding.pry
     @agent = Agent.find(params[:agent][:name])
     if @agent.authenticate(params[:agent][:password])
       set_session

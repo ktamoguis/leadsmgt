@@ -1,0 +1,7 @@
+<%= form_for @agent, url: "/signin" do |f| %>
+  <label>Name:</label>
+  <%= f.collection_select :name, Agent.all, :id, :name %>
+  <label>Password:</label>
+  <%= f.password_field :password %>
+  <%= f.submit "Sign In" %>
+<% end %>

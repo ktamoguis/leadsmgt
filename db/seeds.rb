@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Agent.destroy_all
+Region.destroy_all
+
 DATA = {
   :agent_keys =>
     ["name", "password"],
@@ -20,6 +23,7 @@ DATA = {
 def main
   make_users
   make_admin
+  make_region
 end
 
 def make_users
@@ -36,6 +40,10 @@ def make_admin
   DATA[:admins].each do |name|
     Agent.create(name: name, manager: true, password: 'password')
   end
+end
+
+def make_region
+  Region.create(name: 'NY')
 end
 
 main
