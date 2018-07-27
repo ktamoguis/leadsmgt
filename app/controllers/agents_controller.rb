@@ -9,20 +9,22 @@ class AgentsController < ApplicationController
     @agent = Agent.new(agent_params)
     @agent.save
     set_session
-
-    @user = User.new(user_params)
-      @user.save
-      set_session
+    binding.pry
+    redirect_to agent_path(@agent)
   end
+
+  def show
+    @agent = Agent.find(params[:id])
+  end
+
 
   private
   def agent_params
-    params.require(:user).permit(:name, :password, :admin)
+    params.require(:agent).permit(:name, :password, :manager)
   end
 
   def set_session
     session[:agent_id] = @agent.id
-    redirect_to agent_path(@agent)
   end
 
 end
