@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_214903) do
+ActiveRecord::Schema.define(version: 2018_07_27_004533) do
 
   create_table "agents", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
     t.boolean "manager", default: false
-    t.integer "rank"
+    t.integer "rank", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "region_id"
