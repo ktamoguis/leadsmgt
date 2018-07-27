@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/' => 'sessions#welcome'
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   post '/signout' => 'sessions#destroy'

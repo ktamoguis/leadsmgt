@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
 
+  def welcome
+  end
+
   def new
     @agent = Agent.new
   end
@@ -15,6 +18,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session.delete :agent_id
+    redirect_to '/'
   end
 
   private
