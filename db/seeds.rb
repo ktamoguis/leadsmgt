@@ -34,6 +34,8 @@ end
 
 def make_admin
   DATA[:admins].each do |name|
-    Agent.create(name: name, admin: true, password: 'password')
+    Agent.create(name: name, manager: true, password: 'password')
   end
 end
+
+main

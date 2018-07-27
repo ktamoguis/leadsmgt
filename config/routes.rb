@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   post '/signout' => 'sessions#destroy'
+  get '/signup' => 'agents#new'
 
   resources :industries
   resources :regions
