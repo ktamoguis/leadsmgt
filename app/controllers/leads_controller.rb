@@ -23,7 +23,7 @@ class LeadsController < ApplicationController
 
   private
   def leads_params
-    params.require(:lead).permit(:name, :status, :industry_id)
+    params.require(:lead).permit(:name, :status, :industry_id, industry_attributes:[:name])
   end
 
   def current_user

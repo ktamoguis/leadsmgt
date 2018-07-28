@@ -11,7 +11,4 @@ class Lead < ApplicationRecord
     self.where("status = Go")
   end
 
-
-
-
 end
