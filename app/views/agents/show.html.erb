@@ -1,6 +1,13 @@
 <h1><%= @agent.name %></h1>
 <h2><%= @agent.region.name %></h2>
 
+<p><%= form_tag signout_path do %>
+  <input type=submit value='Sign Out'>
+<% end %>
+</p>
+
+<p><%= link_to "Create Lead", new_lead_path %></p>
+
 <table>
   <tr>
     <th>ID no</th>
@@ -8,13 +15,12 @@
     <th>Lead Name</th>
     <th>Status</th>
     <th>Booked Amount</th>
-    <th>
   </tr>
   <% @agent.leads.each do |lead| %>
   <tr>
       <td><%= lead.id %></td>
       <td><%= lead.industry.name %></td>
-      <td><%= lead.name %></td>
+      <td><%= link_to lead.name, edit_lead_path(lead) %></td>
       <td><%= lead.status %></td>
       <td><%= lead.booked_loans %></td>
   </tr>

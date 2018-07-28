@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    binding.pry
     session.delete :agent_id
     redirect_to '/'
   end
