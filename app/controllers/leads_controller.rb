@@ -6,7 +6,6 @@ class LeadsController < ApplicationController
   end
 
   def create
-    #binding.pry
     @lead = Lead.new(leads_params)
     @lead.agent = current_user
     #binding.pry
@@ -22,12 +21,16 @@ class LeadsController < ApplicationController
   end
 
   def update
-    binding.pry
     @lead = Lead.find(params[:id])
     binding.pry
     @lead.update(leads_params)
     binding.pry
 
+    redirect_to agent_path(current_user)
+  end
+
+  def show
+    @lead = Lead.find(params[:id])
     redirect_to agent_path(current_user)
   end
 
