@@ -3,7 +3,12 @@
 <%= form_for @lead do |f| %>
   <label>Name:</label>
   <%= f.text_field :name %><br>
-  <label>Industry: </label><br>
+  <label>Industry: </label>
+  <%= f.collection_select  :industry_id, Industry.all, :id, :name %><br>
+  <label>Create Industry:</label>
+  <%= f.fields_for :industry, @lead.build_industry do |industry_fields| %>
+    <%= f.collection_select :industry_id, Industry.all, :id, :name, :prompt => true %><br>
+  <% end %>
   <label>Status: </label>
   <%= f.select(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']],'GO')) %>
 

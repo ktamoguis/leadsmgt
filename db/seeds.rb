@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Agent.destroy_all
 Region.destroy_all
+Industry.destroy_all
 
 DATA = {
   :agent_keys =>
@@ -24,6 +25,7 @@ def main
   make_users
   make_admin
   make_region
+  make_industry
 end
 
 def make_users
@@ -44,6 +46,10 @@ end
 
 def make_region
   Region.create(name: 'NY')
+end
+
+def make_industry
+  Industry.create(name: 'Finance')
 end
 
 main

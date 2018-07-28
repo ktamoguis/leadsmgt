@@ -6,9 +6,15 @@ class AgentsController < ApplicationController
 
   def create
     binding.pry
-    @region = Region.find_by(id: params[:agent][:region_id])
-    @agent = Agent.new(agent_params)
-    @agent.region = @region
+    #if params[:agent][:region_attributes][:name].nil?
+    #  @region = Region.find_by(id: params[:agent][:region_id])
+    #else
+    #  @region = Region.create(params[:agent][:region_attributes][:name])
+    #end
+
+    @agent = Agent.create(agent_params)
+    binding.pry
+    #@agent.region = @region
     @agent.save
     set_session
   end
@@ -20,7 +26,7 @@ class AgentsController < ApplicationController
 
   private
   def agent_params
-    params.require(:agent).permit(:name, :password, :manager, :region_id)
+    params.require(:agent).permit(:name, :password, :manager, :region_id, region_attributes:[:name])
   end
 
   def set_session
