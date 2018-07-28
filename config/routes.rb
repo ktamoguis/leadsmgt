@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   post '/signout' => 'sessions#destroy'
   get '/signup' => 'agents#new'
 
+  resources :agents, only: [:show] do
+    resources :leads, only: [:new, :edit, :show]
+  end
+
   resources :industries
   resources :regions
   resources :leads
