@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     if @agent.authenticate(params[:agent][:password])
       set_session
     else
-      redirect_to signin
+      redirect_to signin_path
     end
   end
 
