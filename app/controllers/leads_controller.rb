@@ -1,15 +1,17 @@
 class LeadsController < ApplicationController
 
   def new
+    binding.pry
     @agent = current_user
     @lead = Lead.new
+    @region = @agent.region
   end
 
   def create
     @lead = Lead.create(leads_params)
-    #@lead.agent = current_user
     binding.pry
     if @lead.errors.any?
+      @region = current_user.region
       render :new
     else
       @lead.save
@@ -23,13 +25,11 @@ class LeadsController < ApplicationController
 
   def update
     @lead = Lead.find(params[:id])
-    binding.pry
     @lead.update(leads_params)
     if @lead.errors.any?
-      binding.pry
       render :new
     else
-      redirect_to lead_path
+      redirect_to lead_path(@lead)
     end
   end
 
@@ -39,7 +39,6 @@ class LeadsController < ApplicationController
   end
 
   def index
-    #binding.pry
     @agent = current_user
     if params[:status].nil? || params[:status] == ""
       @leads = @agent.leads
@@ -51,7 +50,7 @@ class LeadsController < ApplicationController
 
   private
   def leads_params
-    params.require(:lead).permit(:name, :status, :agent_id, :booked_loans, :industry_id, industry_attributes:[:name])
+    params.require(:lead).permit(:name, :status, :agent_id, :region_id, :booked_loans, :industry_id, industry_attributes:[:name])
   end
 
   def current_user
