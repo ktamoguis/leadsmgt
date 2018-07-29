@@ -5,10 +5,10 @@ class AgentsController < ApplicationController
   end
 
   def create
-    binding.pry
+    #binding.pry
     @agent = Agent.create(agent_params)
     if !@agent.errors.empty?
-      binding.pry
+      #binding.pry
       render :new
     else
       set_session
@@ -18,11 +18,6 @@ class AgentsController < ApplicationController
   def show
     binding.pry
     @agent = Agent.find(params[:id])
-    if params[:status].nil? || params[:status] == ""
-      @leads = @agent.leads
-    else
-      @leads = Lead.leads_by_agent(@agent.id, params[:status])
-    end
   end
 
 

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/signup' => 'agents#new'
 
   resources :agents, only: [:show] do
-    resources :leads, only: [:new, :edit, :show]
+    resources :leads, only: [:new, :edit, :show, :index]
   end
 
   resources :industries

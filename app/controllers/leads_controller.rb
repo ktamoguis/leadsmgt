@@ -35,7 +35,17 @@ class LeadsController < ApplicationController
 
   def show
     @lead = Lead.find(params[:id])
-    redirect_to agent_path(current_user)
+    #redirect_to agent_path(current_user)
+  end
+
+  def index
+    binding.pry
+    @agent = current_user
+    if params[:status].nil? || params[:status] == ""
+      @leads = @agent.leads
+    else
+      @leads = Lead.leads_by_agent(@agent.id, params[:status])
+    end
   end
 
 

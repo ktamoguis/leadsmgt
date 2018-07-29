@@ -1,0 +1,29 @@
+<h2> Leads Index </h2>
+
+<div>
+  <h4>Filter leads:</h4>
+  <%= form_tag("/agents/#{@agent.id}/leads", method: "get") do %>
+    <%= select_tag(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']]),include_blank: true) %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+
+
+<table>
+  <tr>
+    <th>ID no</th>
+    <th>Industry</th>
+    <th>Lead Name</th>
+    <th>Status</th>
+    <th>Booked Amount</th>
+  </tr>
+  <% @leads.each do |lead| %>
+  <tr>
+      <td><%= lead.id %></td>
+      <td><%= link_to lead.industry.name, industry_path(lead.industry) %></td>
+      <td><%= link_to lead.name, edit_lead_path(lead) %></td>
+      <td><%= lead.status %></td>
+      <td><%= lead.booked_loans %></td>
+  </tr>
+  <% end %>
+</table>
