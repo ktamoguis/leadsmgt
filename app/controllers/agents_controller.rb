@@ -7,9 +7,12 @@ class AgentsController < ApplicationController
   def create
     binding.pry
     @agent = Agent.create(agent_params)
-    binding.pry
-    #@agent.save
-    set_session
+    if !@agent.errors.empty?
+      binding.pry
+      render :new
+    else
+      set_session
+    end
   end
 
   def show
@@ -26,5 +29,6 @@ class AgentsController < ApplicationController
     session[:agent_id] = @agent.id
     redirect_to agent_path(@agent)
   end
+
 
 end

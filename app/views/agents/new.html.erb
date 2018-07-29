@@ -1,3 +1,5 @@
+<h2>Create an Agent</h2>
+
 <%= form_for @agent do |f| %>
   <label>Name:</label>
   <%= f.text_field :name %><br>
@@ -12,4 +14,20 @@
   <label>(Or) Select a Region</label>
   <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => true %><br>
   <%= f.submit %>
+<% end %>
+
+<% if @agent.errors.any? %>
+  <div id="error_explanation">
+    <h3>
+      <%= pluralize(@agent.errors.count, "error") %>
+      prohibited this article from being saved:
+    </h3>
+
+    <ul>
+    <% @agent.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+    <p> Please correct the concerned fields. </p>
+  </div>
 <% end %>
