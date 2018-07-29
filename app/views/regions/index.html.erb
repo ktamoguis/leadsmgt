@@ -1,0 +1,21 @@
+<h2><%= @region.name %></h2>
+
+<br>
+<table>
+  <tr>
+    <th>ID no</th>
+    <th>Industry</th>
+    <th>Lead Name</th>
+    <th>Status</th>
+    <th>Booked Amount</th>
+  </tr>
+  <% @leads.each do |lead| %>
+  <tr>
+      <td><%= lead.id %></td>
+      <td><%= lead.industry.name %></td>
+      <td><%= link_to lead.name, edit_lead_path(lead) %></td>
+      <td><%= lead.status %></td>
+      <td><%= lead.booked_loans %></td>
+  </tr>
+  <% end %>
+</table>
