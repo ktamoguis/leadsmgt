@@ -10,6 +10,10 @@ class Lead < ApplicationRecord
     self.where("status = ?", status).where("agent_id = ?", agent_id)
   end
 
+  def self.leads_by_region(region_id, status)
+    self.where("status = ?", status).where("region_id = ?", region_id)
+  end
+
 
 
 end
