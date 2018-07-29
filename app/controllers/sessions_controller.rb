@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    binding.pry
     @agent = Agent.find(params[:agent][:name])
     if @agent.authenticate(params[:agent][:password])
       set_session

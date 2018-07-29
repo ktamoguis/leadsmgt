@@ -25,9 +25,12 @@ class LeadsController < ApplicationController
     @lead = Lead.find(params[:id])
     binding.pry
     @lead.update(leads_params)
-    binding.pry
-
-    redirect_to agent_path(current_user)
+    if @lead.errors.any?
+      binding.pry
+      render :new
+    else
+      redirect_to agent_path(current_user)
+    end
   end
 
   def show
