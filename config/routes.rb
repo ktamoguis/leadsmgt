@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   resources :agents, only: [:show] do
     resources :leads, only: [:new, :edit, :show, :index]
+    resources :regions, only: [:show]
+    resources :industries, only: [:show]
   end
 
   resources :industries
