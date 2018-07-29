@@ -1,6 +1,9 @@
 <h2>Hi! <%= @agent.name %></h2>
 <h3>Your Region: <%= link_to @agent.region.name, region_path(@agent.region) %></h3>
 <p><%= link_to "Create Lead", new_lead_path %> <%=   link_to "Your Leads", leads_path %></p>
+<% if @agent.manager %>
+  <p><%= link_to "Leads in Your Region", region_path(@agent.region) %><%=   link_to "Your Agents", agents_path %></p>
+<% end %>
 
 <table>
   <tr>

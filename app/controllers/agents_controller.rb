@@ -24,6 +24,15 @@ class AgentsController < ApplicationController
     @total_booked = @agent.leads.sum(:booked_loans)
   end
 
+  def index
+    @agent = Agent.find_by(id: session[:agent_id])
+    if @agent.manager
+      @agents = Agent.where("region_id = ?", @agent.region_id)
+    else
+      redirect_to agent_path(@agent)
+    end
+  end
+
 
   private
   def agent_params
