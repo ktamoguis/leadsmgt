@@ -13,7 +13,7 @@ class LeadsController < ApplicationController
       render :new
     else
       @lead.save
-      redirect_to agent_path(current_user)
+      redirect_to lead_path(@lead)
     end
   end
 
@@ -29,17 +29,17 @@ class LeadsController < ApplicationController
       binding.pry
       render :new
     else
-      redirect_to agent_path(current_user)
+      redirect_to lead_path
     end
   end
 
   def show
     @lead = Lead.find(params[:id])
-    #redirect_to agent_path(current_user)
+    @agent = current_user
   end
 
   def index
-    binding.pry
+    #binding.pry
     @agent = current_user
     if params[:status].nil? || params[:status] == ""
       @leads = @agent.leads

@@ -1,0 +1,10 @@
+<h3>Your Lead</h3>
+
+<h4><label>Lead Name: </label><%= @lead.name %></h4>
+<h4><label>Industry: </label><%= @lead.industry.name %></h4>
+<h4><label>Status: </label><%= @lead.status %></h4>
+<% if @lead.status == "Converted" %>
+  <h4><label>Booked amount($): </label><%= @lead.booked_loans %></h4>
+<% end %>
+
+<%= link_to "Back to Profile", agent_path(@agent) %>

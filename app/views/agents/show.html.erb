@@ -1,9 +1,26 @@
-<h2><%= @agent.name %></h2>
-<h2><%= link_to @agent.region.name, region_path(@agent.region) %></h2>
+<h2>Hi! <%= @agent.name %></h2>
+<h3>Your Region: <%= link_to @agent.region.name, region_path(@agent.region) %></h3>
 
 <p><%= form_tag signout_path do %>
   <input type=submit value='Sign Out'>
 <% end %>
 </p>
 
-<p><%= link_to "Create Lead", new_lead_path %></p>
+<p><%= link_to "Create Lead", new_lead_path %> <%=   link_to "Your Leads", leads_path %></p>
+
+<table>
+  <tr>
+    <th>Total Leads</th>
+    <th>Total Go</th>
+    <th>Total No Go</th>
+    <th>Total Converted</th>
+    <th>Total Booked Loans</th>
+  </tr>
+  <tr>
+    <td><%= @total_leads %></td>
+    <td><%= @total_go %></td>
+    <td><%= @total_nogo %></td>
+    <td><%= @total_converted %></td>
+    <td><%= @total_booked %></td>
+  </tr>
+</table>

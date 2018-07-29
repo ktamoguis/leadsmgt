@@ -16,8 +16,12 @@ class AgentsController < ApplicationController
   end
 
   def show
-    binding.pry
     @agent = Agent.find(params[:id])
+    @total_leads = @agent.leads.count
+    @total_go = @agent.leads.where(status: "Go").count
+    @total_nogo = @agent.leads.where(status: "No Go").count
+    @total_converted = @agent.leads.where(status: "Converted").count
+    @total_booked = @agent.leads.sum(:booked_loans)
   end
 
 
