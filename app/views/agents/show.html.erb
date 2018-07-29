@@ -1,4 +1,4 @@
-<h1><%= @agent.name %></h1>
+<h2><%= @agent.name %></h2>
 <h2><%= @agent.region.name %></h2>
 
 <p><%= form_tag signout_path do %>
@@ -8,6 +8,15 @@
 
 <p><%= link_to "Create Lead", new_lead_path %></p>
 
+<div>
+  <h4>Filter leads:</h4>
+  <%= form_tag("/agents/#{@agent.id}", method: "get") do %>
+    <%= select_tag(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']]),include_blank: true) %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+
+<br>
 <table>
   <tr>
     <th>ID no</th>
@@ -16,7 +25,7 @@
     <th>Status</th>
     <th>Booked Amount</th>
   </tr>
-  <% @agent.leads.each do |lead| %>
+  <% @leads.each do |lead| %>
   <tr>
       <td><%= lead.id %></td>
       <td><%= lead.industry.name %></td>
