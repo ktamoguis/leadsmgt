@@ -7,7 +7,7 @@ class LeadsController < ApplicationController
 
   def create
     @lead = Lead.create(leads_params)
-    @lead.agent = current_user
+    #@lead.agent = current_user
     binding.pry
     if @lead.errors.any?
       render :new
@@ -41,7 +41,7 @@ class LeadsController < ApplicationController
 
   private
   def leads_params
-    params.require(:lead).permit(:name, :status, :booked_loans, :industry_id, industry_attributes:[:name])
+    params.require(:lead).permit(:name, :status, :agent_id, :booked_loans, :industry_id, industry_attributes:[:name])
   end
 
   def current_user
