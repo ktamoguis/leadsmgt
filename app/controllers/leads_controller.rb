@@ -6,17 +6,18 @@ class LeadsController < ApplicationController
   end
 
   def create
-    @lead = Lead.new(leads_params)
+    @lead = Lead.create(leads_params)
     @lead.agent = current_user
-    #binding.pry
-    @lead.save
-    #binding.pry
-
-    redirect_to agent_path(current_user)
+    binding.pry
+    if @lead.errors.any?
+      render :new
+    else
+      @lead.save
+      redirect_to agent_path(current_user)
+    end
   end
 
   def edit
-    binding.pry
     @lead = Lead.find_by(id: params[:id])
   end
 

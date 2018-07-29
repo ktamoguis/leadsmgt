@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_27_004533) do
+ActiveRecord::Schema.define(version: 2018_07_29_035433) do
 
   create_table "agents", force: :cascade do |t|
     t.string "name"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2018_07_27_004533) do
   create_table "leads", force: :cascade do |t|
     t.string "name"
     t.string "status"
-    t.integer "booked_loans"
+    t.integer "booked_loans", default: 0
     t.integer "agent_id"
     t.integer "industry_id"
     t.datetime "created_at", null: false

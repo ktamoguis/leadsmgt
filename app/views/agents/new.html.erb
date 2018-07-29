@@ -18,10 +18,10 @@
 
 <% if @agent.errors.any? %>
   <div id="error_explanation">
-    <h3>
+    <h4>
       <%= pluralize(@agent.errors.count, "error") %>
       prohibited this article from being saved:
-    </h3>
+    </h4>
 
     <ul>
     <% @agent.errors.full_messages.each do |msg| %>
