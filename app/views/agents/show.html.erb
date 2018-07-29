@@ -1,12 +1,16 @@
-<h2>Hi! <%= @agent.name %></h2>
-<h3>Your Region: <%= link_to @agent.region.name, region_path(@agent.region) %></h3>
-
-<p><%= form_tag signout_path do %>
-  <input type=submit value='Sign Out'>
+<% if @current_user.manager %>
+  <h2>Agent name: <%= @agent.name %></h2>
+  <p><%= link_to "Back to Index", leads_path %><p>
+<% else %>
+  <h2>Hi! <%= @agent.name %></h2>
+  <h3>Your Region: <%= link_to @agent.region.name, region_path(@agent.region) %></h3>
+  <p><%= form_tag signout_path do %>
+    <input type=submit value='Sign Out'>
+  <% end %>
+  </p>
+  <p><%= link_to "Create Lead", new_lead_path %> <%=   link_to "Your Leads", leads_path %></p>
 <% end %>
-</p>
 
-<p><%= link_to "Create Lead", new_lead_path %> <%=   link_to "Your Leads", leads_path %></p>
 
 <table>
   <tr>

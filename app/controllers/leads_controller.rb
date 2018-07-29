@@ -34,16 +34,27 @@ class LeadsController < ApplicationController
   end
 
   def show
+    binding.pry
     @lead = Lead.find(params[:id])
     @agent = current_user
   end
 
   def index
+    binding.pry
     @agent = current_user
-    if params[:status].nil? || params[:status] == ""
-      @leads = @agent.leads
+    if @agent.manager
+      binding.pry
+      if params[:status].nil? || params[:status] == ""
+        @leads = Lead.by_manager(@agent.region.id)
+      else
+        @leads = Lead.by_region(@agent.region.id, params[:status])
+      end
     else
-      @leads = Lead.leads_by_agent(@agent.id, params[:status])
+      if params[:status].nil? || params[:status] == ""
+        @leads = @agent.leads
+      else
+        @leads = Lead.by_agent(@agent.id, params[:status])
+      end
     end
   end
 

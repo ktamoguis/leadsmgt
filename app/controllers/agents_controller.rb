@@ -16,6 +16,8 @@ class AgentsController < ApplicationController
   end
 
   def show
+    @current_user = current_user
+    binding.pry
     @agent = Agent.find(params[:id])
     @total_leads = @agent.leads.count
     @total_go = @agent.leads.where(status: "Go").count
@@ -33,6 +35,10 @@ class AgentsController < ApplicationController
   def set_session
     session[:agent_id] = @agent.id
     redirect_to agent_path(@agent)
+  end
+
+  def current_user
+    Agent.find(session[:agent_id])
   end
 
 

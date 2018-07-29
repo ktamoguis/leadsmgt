@@ -16,14 +16,24 @@
     <th>Lead Name</th>
     <th>Status</th>
     <th>Booked Amount</th>
+    <% if @agent.manager %>
+      <th>Agent</th>
+    <% end %>
   </tr>
   <% @leads.each do |lead| %>
   <tr>
       <td><%= lead.id %></td>
       <td><%= link_to lead.industry.name, industry_path(lead.industry) %></td>
-      <td><%= link_to lead.name, edit_lead_path(lead) %></td>
+      <% if @agent.manager %>
+        <td><%= lead.name %></td>
+      <% else %>
+        <td><%= link_to lead.name, edit_lead_path(lead) %></td>
+      <% end %>
       <td><%= lead.status %></td>
       <td><%= lead.booked_loans %></td>
+      <% if @agent.manager %>
+        <td><%= link_to lead.agent.name, agent_path(lead.agent) %></td>
+      <% end %>
   </tr>
   <% end %>
 </table>
