@@ -6,7 +6,7 @@ class RegionsController < ApplicationController
     if @agent.manager
       @region = Region.find_by(id: params[:id])
       if params[:status].nil? || params[:status] == ""
-        @leads = Lead.by_manager(@region.id)
+        @leads = Lead.by_manager_region(@region.id)
       else
         @leads = Lead.by_region(@region.id, params[:status])
       end

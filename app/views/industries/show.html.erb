@@ -1,5 +1,16 @@
 <h2><%= @industry.name %></h2>
 
+<%= link_to "Back", agent_path(session[:agent_id]) %><br>
+
+<h4> Leads in the Industry </h4>
+<div>
+  <h4>Filter leads:</h4>
+  <%= form_tag("/agents/#{session[:agent_id]}/industry/#{@industry.id}", method: "get") do %>
+    <%= select_tag(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']]),include_blank: true) %>
+    <%= submit_tag "Filter" %>
+  <% end %>
+</div>
+
 <br>
 <table>
   <tr>

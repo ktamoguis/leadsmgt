@@ -14,8 +14,16 @@ class Lead < ApplicationRecord
     self.where("status = ?", status).where("region_id = ?", region_id)
   end
 
-  def self.by_manager(region_id)
+  def self.by_industry(industry_id, status)
+    self.where("status = ?", status).where("industry_id = ?", industry_id)
+  end
+
+  def self.by_manager_region(region_id)
     self.where("region_id = ?", region_id)
+  end
+
+  def self.by_manager_industry(industry_id)
+    self.where("industry_id = ?", industry_id)
   end
 
 

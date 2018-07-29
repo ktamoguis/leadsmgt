@@ -5,7 +5,7 @@
 <h4> Leads in the Region </h4>
 <div>
   <h4>Filter leads:</h4>
-  <%= form_tag("/regions/#{@region.id}", method: "get") do %>
+  <%= form_tag("/agents/#{session[:agent_id]}/regions/#{@region.id}", method: "get") do %>
     <%= select_tag(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']]),include_blank: true) %>
     <%= submit_tag "Filter" %>
   <% end %>
