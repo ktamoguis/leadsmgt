@@ -42,19 +42,10 @@ class LeadsController < ApplicationController
   def index
     binding.pry
     @agent = current_user
-    if @agent.manager
-      binding.pry
-      if params[:status].nil? || params[:status] == ""
-        @leads = Lead.by_manager(@agent.region.id)
-      else
-        @leads = Lead.by_region(@agent.region.id, params[:status])
-      end
+    if params[:status].nil? || params[:status] == ""
+      @leads = @agent.leads
     else
-      if params[:status].nil? || params[:status] == ""
-        @leads = @agent.leads
-      else
-        @leads = Lead.by_agent(@agent.id, params[:status])
-      end
+      @leads = Lead.by_agent(@agent.id, params[:status])
     end
   end
 

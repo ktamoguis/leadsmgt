@@ -16,8 +16,6 @@ class AgentsController < ApplicationController
   end
 
   def show
-    @current_user = current_user
-    binding.pry
     @agent = Agent.find(params[:id])
     @total_leads = @agent.leads.count
     @total_go = @agent.leads.where(status: "Go").count
