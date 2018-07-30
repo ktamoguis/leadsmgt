@@ -2,7 +2,7 @@ class LeadsController < ApplicationController
 
   def new
     binding.pry
-    log_in_check
+    control_check
     @agent = current_user
     @lead = Lead.new
     @region = @agent.region
@@ -22,7 +22,7 @@ class LeadsController < ApplicationController
 
   def edit
     binding.pry
-    control_check(params[:id])
+    control_check
     @lead = Lead.find_by(id: params[:id])
   end
 
@@ -55,6 +55,7 @@ class LeadsController < ApplicationController
 
   def index
     binding.pry
+    control_checks
     @agent = current_user
     if params[:status].nil? || params[:status] == ""
       @leads = @agent.leads
