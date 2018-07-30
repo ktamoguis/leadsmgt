@@ -15,6 +15,20 @@ class AgentsController < ApplicationController
     end
   end
 
+  def edit
+    @agent = Agent.find(params[:id])
+  end
+
+  def update
+    @agent = Agent.find(params[:id])
+    @agent.update(agent_params)
+    if @agent.errors.any?
+      render :new
+    else
+      redirect_to agent_path(@agent)
+    end
+  end
+
   def show
     @agent = Agent.find(params[:id])
     @total_leads = @agent.leads.count

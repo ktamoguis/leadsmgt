@@ -22,6 +22,11 @@
   </tr>
 </table>
 
+<p><%= form_tag edit_agent_path(@agent), method: "get" do %>
+    <%= submit_tag("Edit Agent") %>
+  <% end %>
+</p>
+
 <p><%= form_tag signout_path do %>
   <input type=submit value='Sign Out'>
 <% end %>
