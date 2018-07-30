@@ -1,0 +1,25 @@
+<h2>Industries summary</h2>
+
+<br>
+<table>
+  <tr>
+    <th>Industry ID</th>
+    <th>Industry Name</th>
+    <th>Total Leads</th>
+    <th>Total Go</th>
+    <th>Total No Go</th>
+    <th>Total Converted</th>
+    <th>Total Booked Loans</th>
+  </tr>
+  <% @industries.each do |industry| %>
+  <tr>
+      <td><%= industry.id %></td>
+      <td><%= industry.name %></td>
+      <td><%= industry.leads.count %></td>
+      <td><%= industry.leads.where(status: "Go").count %></td>
+      <td><%= industry.leads.where(status: "No Go").count %></td>
+      <td><%= industry.leads.where(status: "Converted").count %></td>
+      <td><%= industry.leads.sum(:booked_loans) %></td>
+  </tr>
+  <% end %>
+</table>
