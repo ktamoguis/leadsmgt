@@ -1,7 +1,7 @@
 class AgentsController < ApplicationController
 
   def new
-    control_check
+    agent_check
     @agent = Agent.new
   end
 
@@ -17,7 +17,7 @@ class AgentsController < ApplicationController
   end
 
   def edit
-    control_check
+    agent_check
     @agent = Agent.find(params[:id])
   end
 
@@ -32,8 +32,8 @@ class AgentsController < ApplicationController
   end
 
   def show
-    control_check
-    @agent = Agent.find(params[:id])
+    agent_check
+    @agent = current_user
     @total_leads = @agent.leads.count
     @total_go = @agent.leads.where(status: "Go").count
     @total_nogo = @agent.leads.where(status: "No Go").count
@@ -42,7 +42,7 @@ class AgentsController < ApplicationController
   end
 
   def index
-    control_check
+    agent_check
     @agent = Agent.find_by(id: session[:agent_id])
     if @agent.manager
       @agents = Agent.where("region_id = ?", @agent.region_id)
@@ -66,42 +66,27 @@ class AgentsController < ApplicationController
     Agent.find(session[:agent_id])
   end
 
-  def log_in_check
+  def agent_check
     if !logged_in?
-      not_logged_in_action
-    end
-  end
-
-  def control_check
-    if !logged_in?
-      not_logged_in_action
+      flash[:notice] = "Agent not logged in"
+      redirect_to '/'
     elsif agent_is_not_current_user?
-      agent_not_current_user_action
+      flash[:notice] = "Agent is not current user or agent doesn't exist"
+      redirect_to agent_path(session[:agent_id])
     end
   end
-
 
   def logged_in?
     !!session[:agent_id]
   end
 
-  def not_logged_in_action
-    flash[:notice] = "Agent not logged in"
-    redirect_to '/'
-  end
-
-
   def agent_is_not_current_user?
-    if params[:agent_id].nil?
-    else
-      Agent.find_by(id: params[:agent_id]) != current_user
+    if !params[:id].nil?
+      Agent.find_by(id: params[:id]) != current_user
     end
   end
 
-  def agent_not_current_user_action
-    flash[:notice] = "Lead does not belong to current agent"
-    redirect_to agent_path(session[:agent_id])
-  end
+
 
 
 end

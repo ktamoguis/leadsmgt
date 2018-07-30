@@ -39,9 +39,10 @@ class LeadsController < ApplicationController
   def show
     binding.pry
     control_check
-    lead_exist_check(params[:id])
-    @lead = Lead.find_by(id: params[:id])
-    @agent = @lead.agent
+    if Lead.find_by(id: params[:id])
+      @lead = Lead.find_by(id: params[:id])
+      @agent = @lead.agent
+    end
 
   end
 
@@ -55,7 +56,7 @@ class LeadsController < ApplicationController
 
   def index
     binding.pry
-    control_checks
+    control_check
     @agent = current_user
     if params[:status].nil? || params[:status] == ""
       @leads = @agent.leads
@@ -74,55 +75,45 @@ class LeadsController < ApplicationController
     Agent.find(session[:agent_id])
   end
 
-  def log_in_check
-    if !logged_in?
-      not_logged_in_action
-    end
-  end
-
   def control_check
     if !logged_in?
-      not_logged_in_action
-    elsif agent_is_not_current_user?
-      agent_not_current_user_action
-    end
-  end
-
-  def lead_exist_check(lead_id)
-    if !Lead.find_by(id: lead_id)
+      flash[:notice] = "Agent not logged in"
+      redirect_to '/'
+    elsif !lead_exists?
       flash[:notice] = "Lead doesn't exist"
+      redirect_to agent_path(session[:agent_id])
+    elsif agent_is_not_current_user?
+      flash[:notice] = "Agent is not current user or agent doesn't exist"
+      redirect_to agent_path(session[:agent_id])
+    elsif lead_does_not_belong_to_agent?
+      flash[:notice] = "Lead does not belong to current agent"
       redirect_to agent_path(session[:agent_id])
     end
   end
 
-
   def logged_in?
+    #binding.pry
     !!session[:agent_id]
   end
 
-  def not_logged_in_action
-    flash[:notice] = "Agent not logged in"
-    redirect_to '/'
-  end
-
-  def lead_exists?(id)
-    Lead.find_by(id: id)
-  end
-
-  def lead_not_exists_action
-    flash[:notice] = "Lead doesn't exist"
-    redirect_to agent_path(session[:agent_id])
+  def lead_exists?
+    #binding.pry
+    if !params[:id].nil?
+      Lead.find_by(id: params[:id]) != nil
+    end
   end
 
   def agent_is_not_current_user?
-    if params[:agent_id].nil?
-    else
+    if !params[:agent_id].nil?
       Agent.find_by(id: params[:agent_id]) != current_user
     end
   end
 
-  def agent_not_current_user_action
-    flash[:notice] = "Lead does not belong to current agent"
-    redirect_to agent_path(session[:agent_id])
+  def lead_does_not_belong_to_agent?
+    if !params[:id].nil? && Lead.find_by(id: params[:id])
+      Lead.find_by(id: params[:id]).agent != current_user
+    end
   end
+
+
 end
