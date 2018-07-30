@@ -7,4 +7,11 @@
   <h4><label>Booked amount($): </label><%= @lead.booked_loans %></h4>
 <% end %>
 
+<%= link_to "Edit Lead", edit_lead_path(@lead) %>
+
+<p><%= form_tag lead_path(@lead), method: "delete" do %>
+    <%= submit_tag("Delete") %>
+  <% end %>
+</p>
+
 <%= link_to "Back to Profile", agent_path(@agent) %>

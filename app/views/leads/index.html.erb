@@ -23,7 +23,7 @@
   <tr>
       <td><%= lead.id %></td>
       <td><%= link_to lead.industry.name, industry_path(lead.industry) %></td>
-      <td><%= link_to lead.name, edit_lead_path(lead) %></td>
+      <td><%= link_to lead.name, lead_path(lead) %></td>
       <td><%= lead.status %></td>
       <td><%= lead.booked_loans %></td>
   </tr>

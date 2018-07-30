@@ -39,6 +39,14 @@ class LeadsController < ApplicationController
     @agent = current_user
   end
 
+  def destroy
+    binding.pry
+    @lead = Lead.find(params[:id])
+    @lead.destroy
+    @agent = Agent.find(session[:agent_id])
+    redirect_to agent_path(@agent)
+  end
+
   def index
     binding.pry
     @agent = current_user
