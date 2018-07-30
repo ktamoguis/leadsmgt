@@ -11,10 +11,10 @@ Industry.destroy_all
 
 DATA = {
   :agent_keys =>
-    ["name", "password"],
+    ["name", "region_id", "password"],
   :agents => [
-    ["Karl Almir", "password"],
-    ["Agent1", "password"],
+    ["Karl Almir", 7, "password"],
+    ["Agent1", 7, "password"],
   ],
   :admins => [
     "KTA"
@@ -22,6 +22,7 @@ DATA = {
 }
 
 def main
+  make_region
   make_users
   make_admin
   make_region
@@ -40,16 +41,16 @@ end
 
 def make_admin
   DATA[:admins].each do |name|
-    Agent.create(name: name, manager: true, password: 'password')
+    Agent.create(name: name, manager: true, password: 'password', region_id: @region.id)
   end
 end
 
 def make_region
-  Region.create(name: 'NY')
+  @region = Region.create(name: 'NY')
 end
 
 def make_industry
-  Industry.create(name: 'Finance')
+  @industry = Industry.create(name: 'Finance')
 end
 
 main
