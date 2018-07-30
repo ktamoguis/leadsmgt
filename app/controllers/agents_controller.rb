@@ -23,7 +23,7 @@ class AgentsController < ApplicationController
     @agent = Agent.find(params[:id])
     @agent.update(agent_params)
     if @agent.errors.any?
-      render :new
+      render :edit
     else
       redirect_to agent_path(@agent)
     end
