@@ -1,3 +1,8 @@
 <h1>Welcome to Leads Management</h1>
 
 <%= link_to "Sign Up", signup_path %> Or <%= link_to "Sign In", signin_path %>
+
+<br><br>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>

@@ -1,7 +1,7 @@
 class IndustriesController < ApplicationController
 
   def show
-    binding.pry
+    #binding.pry
     @agent = Agent.find_by(id: session[:agent_id])
     @industry = Industry.find_by(id: params[:id])
     if params[:status].nil? || params[:status] == ""

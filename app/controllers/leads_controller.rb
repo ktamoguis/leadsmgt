@@ -2,6 +2,7 @@ class LeadsController < ApplicationController
 
   def new
     binding.pry
+    log_in_check
     @agent = current_user
     @lead = Lead.new
     @region = @agent.region
@@ -20,6 +21,8 @@ class LeadsController < ApplicationController
   end
 
   def edit
+    binding.pry
+    control_check(params[:id])
     @lead = Lead.find_by(id: params[:id])
   end
 
@@ -35,8 +38,11 @@ class LeadsController < ApplicationController
 
   def show
     binding.pry
-    @lead = Lead.find(params[:id])
-    @agent = current_user
+    control_check
+    lead_exist_check(params[:id])
+    @lead = Lead.find_by(id: params[:id])
+    @agent = @lead.agent
+
   end
 
   def destroy
@@ -65,5 +71,57 @@ class LeadsController < ApplicationController
 
   def current_user
     Agent.find(session[:agent_id])
+  end
+
+  def log_in_check
+    if !logged_in?
+      not_logged_in_action
+    end
+  end
+
+  def control_check
+    if !logged_in?
+      not_logged_in_action
+    elsif agent_is_not_current_user?
+      agent_not_current_user_action
+    end
+  end
+
+  def lead_exist_check(lead_id)
+    if !Lead.find_by(id: lead_id)
+      flash[:notice] = "Lead doesn't exist"
+      redirect_to agent_path(session[:agent_id])
+    end
+  end
+
+
+  def logged_in?
+    !!session[:agent_id]
+  end
+
+  def not_logged_in_action
+    flash[:notice] = "Agent not logged in"
+    redirect_to '/'
+  end
+
+  def lead_exists?(id)
+    Lead.find_by(id: id)
+  end
+
+  def lead_not_exists_action
+    flash[:notice] = "Lead doesn't exist"
+    redirect_to agent_path(session[:agent_id])
+  end
+
+  def agent_is_not_current_user?
+    if params[:agent_id].nil?
+    else
+      Agent.find_by(id: params[:agent_id]) != current_user
+    end
+  end
+
+  def agent_not_current_user_action
+    flash[:notice] = "Lead does not belong to current agent"
+    redirect_to agent_path(session[:agent_id])
   end
 end
