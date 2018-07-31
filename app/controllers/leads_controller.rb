@@ -10,7 +10,7 @@ class LeadsController < ApplicationController
 
   def create
     @lead = Lead.create(leads_params)
-    binding.pry
+    #binding.pry
     if @lead.errors.any?
       @region = current_user.region
       render :new

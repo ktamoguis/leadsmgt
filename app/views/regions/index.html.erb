@@ -11,6 +11,28 @@
   </div>
 
   <div class ="row">
+    <h4>All Regions</h4>
+    <table class="table">
+      <tr>
+        <th>Total Leads</th>
+        <th>Total Go</th>
+        <th>Total No Go</th>
+        <th>Total Converted</th>
+        <th>Total Booked Loans</th>
+      </tr>
+      <tr>
+          <td><%= @total_leads %></td>
+          <td><%= @total_go %></td>
+          <td><%= @total_nogo %></td>
+          <td><%= @total_converted %></td>
+          <td><%= @total_booked %></td>
+      </tr>
+    </table>
+    <br><br>
+  </div>
+
+  <div class ="row">
+    <h4>Per Region</h4>
     <table class="table">
       <tr>
         <th>Region ID</th>

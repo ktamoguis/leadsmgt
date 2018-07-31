@@ -6,10 +6,13 @@
   <div class = "row">
     <%= link_to "Sign Up", signup_path %>&nbsp;&nbsp; Or &nbsp;&nbsp;<%= link_to "Sign In", signin_path %>&nbsp;&nbsp; Or &nbsp;&nbsp;<%= link_to('Log in with Facebook!', '/auth/facebook') %>
   </div>
-</div>
-<br><br>
 
-<% if flash[:notice] %>
-  <div class="alert alert-danger" role="alert"><%= flash[:notice] %></div>
-  <!--<div class="notice"><%= flash[:notice] %></div>-->
-<% end %>
+  <div class = "row">
+    <br><br>
+    <% if flash[:notice] %>
+      <div class="alert alert-danger" role="alert"><%= flash[:notice] %></div>
+      <!--<div class="notice"><%= flash[:notice] %></div>-->
+    <% end %>
+  </div>
+
+</div>

@@ -18,6 +18,11 @@ class IndustriesController < ApplicationController
     @agent = Agent.find_by(id: session[:agent_id])
     if @agent.manager
       @industries = Industry.all
+      @total_leads = Industry.joins(:leads).count
+      @total_go = Industry.joins(:leads).where("status = ?","Go").count
+      @total_nogo = Industry.joins(:leads).where("status = ?","No Go").count
+      @total_converted = Industry.joins(:leads).where("status = ?","Converted").count
+      @total_booked = Industry.joins(:leads).sum(:booked_loans)
     else
       redirect_to agent_path(@agent)
     end

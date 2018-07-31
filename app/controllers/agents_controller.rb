@@ -41,10 +41,16 @@ class AgentsController < ApplicationController
   end
 
   def index
+    binding.pry
     agent_check
     @agent = Agent.find_by(id: session[:agent_id])
     if @agent.manager
       @agents = Agent.where("region_id = ?", @agent.region_id)
+      @total_leads = Lead.where("region_id = ?", @agent.region_id).count
+      @total_go = Lead.where("region_id = ?", @agent.region_id).where("status = ?","Go").count
+      @total_nogo = Lead.where("region_id = ?", @agent.region_id).where("status = ?","No Go").count
+      @total_converted = Lead.where("region_id = ?", @agent.region_id).where("status = ?","Converted").count
+      @total_booked = Lead.where("region_id = ?", @agent.region_id).sum(:booked_loans)
     else
       redirect_to agent_path(@agent)
     end
