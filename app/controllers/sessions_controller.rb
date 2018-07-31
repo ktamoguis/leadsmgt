@@ -16,6 +16,16 @@ class SessionsController < ApplicationController
     end
   end
 
+  def create_with_facebook
+    @agent = Agent.find_or_create_by(name: auth['name']) do |u|
+      u.name = auth['info']['name']
+    end
+
+    set_session
+
+    #render 'welcome/home'
+  end
+
   def destroy
     #binding.pry
     session.delete :agent_id
@@ -27,6 +37,10 @@ class SessionsController < ApplicationController
   def set_session
     session[:agent_id] = @agent.id
     redirect_to agent_path(@agent)
+  end
+
+  def auth
+    request.env['omniauth.auth']
   end
 
 end
