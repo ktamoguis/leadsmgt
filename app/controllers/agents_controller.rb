@@ -1,7 +1,6 @@
 class AgentsController < ApplicationController
 
   def new
-    agent_check
     @agent = Agent.new
   end
 
