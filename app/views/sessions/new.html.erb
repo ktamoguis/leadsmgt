@@ -1,10 +1,16 @@
 <div class = "container">
-<h2>Sign In:</h2>
-<%= form_for @agent, url: "/signin" do |f| %>
-  <label>Name:</label>
-  <%= f.collection_select :name, Agent.all, :id, :name %>
-  <label>Password:</label>
-  <%= f.password_field :password %>
-  <%= f.submit "Sign In" %>
-<% end %>
+  <div class = "row">
+    <h2>Sign In:</h2>
+  </div>
+
+  <div class = "row">
+    <br>
+    <%= form_for @agent, url: "/signin" do |f| %>
+      <label>Name:</label>
+      <%= f.collection_select :name, Agent.all, :id, :name %>
+      <label>Password:</label>
+      <%= f.password_field :password %>
+      <%= f.submit "Sign In" %>
+    <% end %>
+  </div>
 </div>
