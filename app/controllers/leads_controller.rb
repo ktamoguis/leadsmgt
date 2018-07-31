@@ -2,7 +2,7 @@ class LeadsController < ApplicationController
 
   def new
     binding.pry
-    control_check
+    agent_check
     @agent = current_user
     @lead = Lead.new
     @region = @agent.region
@@ -21,7 +21,7 @@ class LeadsController < ApplicationController
   end
 
   def edit
-    binding.pry
+    #binding.pry
     control_check
     @lead = Lead.find_by(id: params[:id])
   end
@@ -37,7 +37,7 @@ class LeadsController < ApplicationController
   end
 
   def show
-    binding.pry
+    #binding.pry
     control_check
     if Lead.find_by(id: params[:id])
       @lead = Lead.find_by(id: params[:id])
@@ -47,7 +47,7 @@ class LeadsController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    #binding.pry
     @lead = Lead.find(params[:id])
     @lead.destroy
     @agent = Agent.find(session[:agent_id])
@@ -55,8 +55,8 @@ class LeadsController < ApplicationController
   end
 
   def index
-    binding.pry
-    control_check
+    #binding.pry
+    agent_check
     @agent = current_user
     if params[:status].nil? || params[:status] == ""
       @leads = @agent.leads
@@ -87,6 +87,16 @@ class LeadsController < ApplicationController
       redirect_to agent_path(session[:agent_id])
     elsif lead_does_not_belong_to_agent?
       flash[:notice] = "Lead does not belong to current agent"
+      redirect_to agent_path(session[:agent_id])
+    end
+  end
+
+  def agent_check
+    if !logged_in?
+      flash[:notice] = "Agent not logged in"
+      redirect_to '/'
+    elsif agent_is_not_current_user?
+      flash[:notice] = "Agent is not current user or agent doesn't exist"
       redirect_to agent_path(session[:agent_id])
     end
   end
