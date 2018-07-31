@@ -1,29 +1,37 @@
 <div class = "container">
-  <h2>Industries summary</h2>
+  <div class = "row">
+    <h2>Industries Summary:</h2>
+  </div>
 
-  <%= link_to "Back to Profile", agent_path(@agent) %><br>
+  <div class = "row">
+    <br>
+    <%= link_to "Back to Profile", agent_path(@agent) %><br>
+    <br>
+  </div>
 
-  <br>
-  <table class="table">
-    <tr>
-      <th>Industry ID</th>
-      <th>Industry Name</th>
-      <th>Total Leads</th>
-      <th>Total Go</th>
-      <th>Total No Go</th>
-      <th>Total Converted</th>
-      <th>Total Booked Loans</th>
-    </tr>
-    <% @industries.each do |industry| %>
-    <tr>
-        <td><%= industry.id %></td>
-        <td><%= industry.name %></td>
-        <td><%= industry.leads.count %></td>
-        <td><%= industry.leads.where(status: "Go").count %></td>
-        <td><%= industry.leads.where(status: "No Go").count %></td>
-        <td><%= industry.leads.where(status: "Converted").count %></td>
-        <td><%= industry.leads.sum(:booked_loans) %></td>
-    </tr>
-    <% end %>
-  </table>
+  <div class = "row">
+    <table class="table">
+      <tr>
+        <th>Industry ID</th>
+        <th>Industry Name</th>
+        <th>Total Leads</th>
+        <th>Total Go</th>
+        <th>Total No Go</th>
+        <th>Total Converted</th>
+        <th>Total Booked Loans</th>
+      </tr>
+      <% @industries.each do |industry| %>
+      <tr>
+          <td><%= industry.id %></td>
+          <td><%= industry.name %></td>
+          <td><%= industry.leads.count %></td>
+          <td><%= industry.leads.where(status: "Go").count %></td>
+          <td><%= industry.leads.where(status: "No Go").count %></td>
+          <td><%= industry.leads.where(status: "Converted").count %></td>
+          <td><%= industry.leads.sum(:booked_loans) %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+
 </div>

@@ -1,22 +1,29 @@
 <div class = "container">
-<h2>Your Lead:</h2>
+  <div class ="row">
+    <h2>Your Lead:</h2>
+  </div>
 
-<h4><label>Lead Name: </label><%= @lead.name %></h4>
-<h4><label>Industry: </label><%= @lead.industry.name %></h4>
-<h4><label>Status: </label><%= @lead.status %></h4>
-<% if @lead.status == "Converted" %>
-  <h4><label>Booked amount($): </label><%= @lead.booked_loans %></h4>
-<% end %>
+  <div class ="row">
+    <h4><strong>Lead Name: </strong><%= @lead.name %></h4>
+    <h4><strong>Industry: </strong><%= @lead.industry.name %></h4>
+    <h4><strong>Status: </strong><%= @lead.status %></h4>
+    <% if @lead.status == "Converted" %>
+      <h4><strong>Booked amount($): </strong><%= @lead.booked_loans %></h4>
+    <% end %>
+  </div>
 
-<p><%= form_tag edit_lead_path(@lead), method: "get" do %>
-    <%= submit_tag("Edit Lead") %>
-  <% end %>
-</p>
+  <div class ="row">
+    <p><%= form_tag edit_lead_path(@lead), method: "get" do %>
+        <%= submit_tag("Edit Lead") %>
+      <% end %>
+    </p>
 
-<p><%= form_tag lead_path(@lead), method: "delete" do %>
-    <%= submit_tag("Delete Lead") %>
-  <% end %>
-</p>
+    <p><%= form_tag lead_path(@lead), method: "delete" do %>
+        <%= submit_tag("Delete Lead") %>
+      <% end %>
+    </p>
 
-<%= link_to "Back to Profile", agent_path(@agent) %>
+    <%= link_to "Back to Profile", agent_path(@agent) %>
+  </div>
+
 </div>
