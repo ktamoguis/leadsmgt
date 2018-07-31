@@ -1,3 +1,4 @@
+<div class = "container">
 <h2>Create an Agent</h2>
 
 <%= form_for @agent do |f| %>
@@ -15,6 +16,8 @@
   <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => true %><br>
   <%= f.submit %>
 <% end %>
+
+</div>
 
 <br><br>
 <% if @agent.errors.any? %>

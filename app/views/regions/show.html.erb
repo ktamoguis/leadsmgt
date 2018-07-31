@@ -1,10 +1,11 @@
+<div class = "container">
 <h2><%= @region.name %></h2>
 
 <%= link_to "Back", agent_path(session[:agent_id]) %><br>
 
 <h4> Leads in the Region </h4>
 <div>
-  <h4>Filter leads:</h4>
+  <label>Filter leads:</label>
   <%= form_tag("/agents/#{session[:agent_id]}/regions/#{@region.id}", method: "get") do %>
     <%= select_tag(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']]),include_blank: true) %>
     <%= submit_tag "Filter" %>
@@ -12,7 +13,7 @@
 </div>
 
 <br>
-<table>
+<table class="table">
   <tr>
     <th>ID no</th>
     <th>Industry</th>
@@ -30,3 +31,4 @@
   </tr>
   <% end %>
 </table>
+</div>

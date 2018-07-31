@@ -1,7 +1,9 @@
-<h1>Welcome to Leads Management</h1>
+<div class = "container">
+<h2>Welcome to Leads Management</h2>
 
 <%= link_to "Sign Up", signup_path %> Or <%= link_to "Sign In", signin_path %> Or <%= link_to('Log in with Facebook!', '/auth/facebook') %>
 
+</div>
 <br><br>
 <% if flash[:notice] %>
     <div class="notice"><%= flash[:notice] %></div>

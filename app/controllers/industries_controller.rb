@@ -25,6 +25,10 @@ class IndustriesController < ApplicationController
 
   private
 
+  def current_user
+    Agent.find(session[:agent_id])
+  end
+
   def control_check
     if !logged_in?
       not_logged_in_action
