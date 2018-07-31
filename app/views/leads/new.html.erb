@@ -11,9 +11,8 @@
   <label>(Or) Select Industry: </label>
   <%= f.collection_select  :industry_id, Industry.all, :id, :name %><br>
   <label>Status: </label>
-  <%= f.select(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']],'GO')) %>
+  <%= f.select(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']],'GO')) %><br>
   <%= f.submit %>
-
 <% end %>
 
 <br><br>

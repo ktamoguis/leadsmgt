@@ -13,7 +13,7 @@ class RegionsController < ApplicationController
   end
 
   def index
-    binding.pry
+    #binding.pry
     control_check
     @agent = Agent.find_by(id: session[:agent_id])
     if @agent.manager

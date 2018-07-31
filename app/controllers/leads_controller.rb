@@ -1,7 +1,7 @@
 class LeadsController < ApplicationController
 
   def new
-    binding.pry
+    #binding.pry
     agent_check
     @agent = current_user
     @lead = Lead.new
