@@ -1,7 +1,7 @@
 class RegionsController < ApplicationController
 
   def show
-    binding.pry
+    #binding.pry
     control_check
     @agent = Agent.find_by(id: session[:agent_id])
     @region = Region.find_by(id: params[:id])
