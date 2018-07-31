@@ -1,29 +1,37 @@
 <div class = "container">
-  <h2>Agents Index</h2>
+  <div class = "row">
+    <h2>Agents Index</h2>
+  </div>
 
-  <%= link_to "Back", agent_path(session[:agent_id]) %><br>
+  <div class = "row">
+    <br>
+    <%= link_to "Back to Profile", agent_path(session[:agent_id]) %><br>
+    <br>
+  </div>
 
-  <br>
-  <table class="table">
-    <tr>
-      <th>ID no</th>
-      <th>Name</th>
-      <th>Total Leads</th>
-      <th>Total Go</th>
-      <th>Total No Go</th>
-      <th>Total Converted</th>
-      <th>Booked Amount</th>
-    </tr>
-    <% @agents.each do |agent| %>
-    <tr>
-        <td><%= agent.id %></td>
-        <td><%= agent.name %></td>
-        <td><%= agent.leads.count %></td>
-        <td><%= agent.leads.where(status: "Go").count %></td>
-        <td><%= agent.leads.where(status: "No Go").count %></td>
-        <td><%= agent.leads.where(status: "Converted").count %></td>
-        <td><%= agent.leads.sum(:booked_loans) %></td>
-    </tr>
-    <% end %>
-  </table>
+  <div class = "row">
+    <table class="table">
+      <br>
+      <tr>
+        <th>ID no</th>
+        <th>Name</th>
+        <th>Total Leads</th>
+        <th>Total Go</th>
+        <th>Total No Go</th>
+        <th>Total Converted</th>
+        <th>Booked Amount</th>
+      </tr>
+      <% @agents.each do |agent| %>
+      <tr>
+          <td><%= agent.id %></td>
+          <td><%= agent.name %></td>
+          <td><%= agent.leads.count %></td>
+          <td><%= agent.leads.where(status: "Go").count %></td>
+          <td><%= agent.leads.where(status: "No Go").count %></td>
+          <td><%= agent.leads.where(status: "Converted").count %></td>
+          <td><%= agent.leads.sum(:booked_loans) %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>

@@ -1,25 +1,30 @@
 <div class = "container">
 
-  <div class="col-md-12">
+  <div class = "row">
     <h2>Hi! <%= @agent.name %></h2>
   </div>
 
 
-  <div class="col-md-12">
+  <div class = "row">
     <h3>Your Region: <%= link_to @agent.region.name, region_path(@agent.region) %></h3>
   </div>
 
-  <div class="col-md-12">
-    <p><%= link_to "Create Lead", new_lead_path %></p>
-    <p><%=   link_to "Your Leads", leads_path %></p>
-    <% if @agent.manager %>
-    <p><%= link_to "Regions Summary", regions_path %></p>
-    <p> <%=link_to "Your Agents", agents_path %></p>
-    <p>  <%=link_to "Industries Summary", industries_path %></p>
-    <% end %>
+  <div class = "row">
+    <br>
+    <span><%= link_to "Create Lead" , new_lead_path %></span>&nbsp;&nbsp;&nbsp;
+    <span><%=link_to "Your Leads" , leads_path %></span>
+    <br>
   </div>
 
-  <div class="col-md-12">
+  <div class = "row">
+    <br>
+    <% if @agent.manager %>
+      <span><%=link_to "Your Agents", agents_path %>&nbsp;&nbsp;&nbsp;<%=link_to "Industries Summary", industries_path %>&nbsp;&nbsp;&nbsp;<%= link_to "Regions Summary", regions_path %></span>
+    <% end %>
+    <br><br>
+  </div>
+
+  <div class = "row">
     <table class="table">
       <tr>
         <th>Total Leads</th>
@@ -38,20 +43,20 @@
     </table>
   </div>
 
-  <div class="col-md-12">
+  <div class = "row">
     <p><%= form_tag edit_agent_path(@agent), method: "get" do %>
         <%= submit_tag("Edit Agent") %>
       <% end %>
     </p>
-
     <p><%= form_tag signout_path do %>
       <input type=submit value='Sign Out'>
     <% end %>
     </p>
+  </div>
 
+  <div class = "row">
+    <% if flash[:notice] %>
+      <div class="alert alert-danger" role="alert"><%= flash[:notice] %></div>
+    <% end %>
   </div>
 </div>
-
-<% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
-<% end %>

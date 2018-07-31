@@ -1,36 +1,42 @@
 <div class = "container">
-  <h2>Edit Agent Details</h2>
+  <div class = "row">
+    <h2>Edit Agent Details</h2>
+  </div>
 
-  <%= form_for @agent do |f| %>
-    <label>Name:</label>
-    <%= f.text_field :name %><br>
-    <label>Password:</label>
-    <%= f.password_field :password %><br>
-    <label>Manager:</label>
-    <%= f.check_box :manager %><br>
-    <label>Create Region:</label>
-    <%= f.fields_for :region, @agent.build_region do |region_fields| %>
-      <%= region_fields.text_field :name %>
-    <% end %>
-    <label>(Or) Select a Region</label>
-    <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => true %><br>
-    <%= f.submit %>
-  <% end %>
-
-  <br><br>
-  <% if @agent.errors.any? %>
-    <div id="error_explanation">
-      <h4>
-        <%= pluralize(@agent.errors.count, "error") %>
-        prohibited this article from being saved:
-      </h4>
-
-      <ul>
-      <% @agent.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+  <div class = "row">
+    <%= form_for @agent do |f| %>
+      <label>Name:</label>
+      <%= f.text_field :name %><br>
+      <label>Password:</label>
+      <%= f.password_field :password %><br>
+      <label>Manager:</label>
+      <%= f.check_box :manager %><br>
+      <label>Create Region:</label>
+      <%= f.fields_for :region, @agent.build_region do |region_fields| %>
+        <%= region_fields.text_field :name %>
       <% end %>
-      </ul>
-      <p> Please correct the concerned fields. </p>
-    </div>
-  <% end %>
+      <label>(Or) Select a Region</label>
+      <%= f.collection_select :region_id, Region.all, :id, :name, :prompt => true %><br>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
+  <div class = "row">
+    <br><br>
+    <% if @agent.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h4>
+          <%= pluralize(@agent.errors.count, "error") %>
+          prohibited this article from being saved:
+        </h4>
+
+        <ul>
+        <% @agent.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+        <p> Please correct the concerned fields. </p>
+      </div>
+    <% end %>
+  </div>
 </div>
