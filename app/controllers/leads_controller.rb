@@ -30,7 +30,7 @@ class LeadsController < ApplicationController
     @lead = Lead.find(params[:id])
     @lead.update(leads_params)
     if @lead.errors.any?
-      render :new
+      render :edit
     else
       redirect_to lead_path(@lead)
     end

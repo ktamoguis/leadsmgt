@@ -1,39 +1,46 @@
 <div class = "container">
-<h2>Edit a Lead</h2>
-
-<%= form_for @lead do |f| %>
-  <label>Name:</label>
-  <%= f.text_field :name %><br>
-  <%= f.hidden_field :agent_id, value: session[:agent_id] %>
-  <%= f.hidden_field :region_id, value: @lead.region.id  %>
-  <label>Create Industry:</label>
-  <%= f.fields_for :industry, @lead.build_industry do |industry_fields| %>
-    <%= industry_fields.text_field :name %>
-  <% end %>
-  <label>(Or) Select Industry: </label>
-  <%= f.collection_select  :industry_id, Industry.all, :id, :name, {:selected => @lead.industry_id} %><br>
-  <label>Status: </label>
-  <%= f.select(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']],'GO')) %><br>
-  <label>Booked loan amount $:</label>
-  <%= f.text_field :booked_loans %><br>
-  <%= f.submit %>
-
-<% end %>
-</div>
-
-<br><br>
-<% if @lead.errors.any? %>
-  <div id="error_explanation">
-    <h4>
-      <%= pluralize(@lead.errors.count, "error") %>
-      prohibited this article from being saved:
-    </h4>
-
-    <ul>
-    <% @lead.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-    <p> Please correct the concerned fields. </p>
+  <div class = "row">
+    <h2>Edit a Lead</h2>
   </div>
-<% end %>
+
+  <div class = "row">
+    <br>
+    <%= form_for @lead do |f| %>
+      <label>Name:</label>
+      <%= f.text_field :name %><br>
+      <%= f.hidden_field :agent_id, value: session[:agent_id] %>
+      <%= f.hidden_field :region_id, value: @lead.region.id  %>
+      <label>Create Industry:</label>
+      <%= f.fields_for :industry, @lead.build_industry do |industry_fields| %>
+        <%= industry_fields.text_field :name %>
+      <% end %>
+      <label>(Or) Select Industry: </label>
+      <%= f.collection_select  :industry_id, Industry.all, :id, :name, {:selected => @lead.industry_id} %><br>
+      <label>Status: </label>
+      <%= f.select(:status ,options_for_select([['Go','Go'],['No Go','No Go'],['Converted','Converted']],'GO')) %><br>
+      <label>Booked loan amount $:</label>
+      <%= f.text_field :booked_loans %><br><br>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
+  <div class = "row">
+    <br><br>
+    <% if @lead.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <h4>
+          <%= pluralize(@lead.errors.count, "error") %>
+          prohibited this article from being saved:
+        </h4>
+
+        <ul>
+        <% @lead.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+        <p> Please correct the concerned fields. </p>
+      </div>
+    <% end %>
+  </div>
+
+</div>
