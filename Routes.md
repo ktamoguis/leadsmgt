@@ -43,3 +43,15 @@
                         PATCH  /agents/:id(.:format)                                                                    agents#update
                         PUT    /agents/:id(.:format)                                                                    agents#update
                         DELETE /agents/:id(.:format)                                                                    agents#destroy
+
+  <div class = "container">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <a class="navbar-brand" href="/">Home</a>
+      <% if !session[:agent_id] %>
+        <a class="navbar-brand" href="/signin">Sign In</a>
+        <a class="navbar-brand" href="/auth/facebook'">Sign In Using Facebook</a>'
+      <% end %>
+      <%= link_to "Sign Out", {controller: "sessions", action: "destroy"}, class="navbar-brand" %>
+    </nav>
+    <br><br><br>
+  </div>

@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
   end
 
   def agent_is_not_current_user?
-    binding.pry
+    #binding.pry
     if !params[:agent_id].nil?
-      Agent.find_by(id: params[:id]) != current_user
+      Agent.find_by(id: params[:agent_id]) != current_user
     end
   end
 
