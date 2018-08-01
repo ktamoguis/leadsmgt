@@ -6,6 +6,7 @@ class LeadsController < ApplicationController
     @agent = current_user
     @lead = Lead.new
     @region = @agent.region
+    #redirect_to new_agent_lead_path(@agent)
   end
 
   def create
