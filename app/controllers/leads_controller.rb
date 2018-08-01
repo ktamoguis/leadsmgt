@@ -71,10 +71,6 @@ class LeadsController < ApplicationController
     params.require(:lead).permit(:name, :status, :agent_id, :region_id, :booked_loans, :industry_id, industry_attributes:[:name])
   end
 
-  def current_user
-    Agent.find(session[:agent_id])
-  end
-
   def control_check
     if !logged_in?
       flash[:notice] = "Agent not logged in"

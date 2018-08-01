@@ -41,7 +41,7 @@ class AgentsController < ApplicationController
   end
 
   def index
-    binding.pry
+    #binding.pry
     agent_check
     @agent = Agent.find_by(id: session[:agent_id])
     if @agent.manager
@@ -61,37 +61,6 @@ class AgentsController < ApplicationController
   def agent_params
     params.require(:agent).permit(:name, :password, :manager, :region_id, region_attributes:[:name])
   end
-
-  def set_session
-    session[:agent_id] = @agent.id
-    redirect_to agent_path(@agent)
-  end
-
-  def current_user
-    Agent.find(session[:agent_id])
-  end
-
-  def agent_check
-    if !logged_in?
-      flash[:notice] = "Agent not logged in"
-      redirect_to '/'
-    elsif agent_is_not_current_user?
-      flash[:notice] = "Agent is not current user or agent doesn't exist"
-      redirect_to agent_path(session[:agent_id])
-    end
-  end
-
-  def logged_in?
-    !!session[:agent_id]
-  end
-
-  def agent_is_not_current_user?
-    if !params[:id].nil?
-      Agent.find_by(id: params[:id]) != current_user
-    end
-  end
-
-
 
 
 end

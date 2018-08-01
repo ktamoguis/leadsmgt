@@ -36,12 +36,8 @@ class SessionsController < ApplicationController
     redirect_to '/'
   end
 
-  private
 
-  def set_session
-    session[:agent_id] = @agent.id
-    redirect_to agent_path(@agent)
-  end
+  private
 
   def auth
     request.env['omniauth.auth']
