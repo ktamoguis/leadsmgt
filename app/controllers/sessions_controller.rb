@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def create_with_facebook
-    binding.pry
+    #binding.pry
     @agent = Agent.find_or_create_by(name: auth['info']['name']) do |u|
       u.region = Region.all.first
       u.password = auth['info']['name']
