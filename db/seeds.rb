@@ -8,41 +8,24 @@
 Agent.destroy_all
 Region.destroy_all
 Industry.destroy_all
+Lead.destroy_all
 
-DATA = {
-  :agent_keys =>
-    ["name", "region_id", "password"],
-  :agents => [
-    ["Karl Almir", 7, "password"],
-    ["Agent1", 7, "password"],
-  ],
-  :admins => [
-    "KTA"
-  ]
-}
 
 def main
   make_region
+  make_industry
   make_users
   make_admin
-  make_region
-  make_industry
 end
 
+
 def make_users
-  DATA[:agents].each do |agent|
-    new_agent = Agent.new
-    agent.each_with_index do |attribute, i|
-      new_agent.send(DATA[:agent_keys][i]+"=", attribute)
-    end
-    new_agent.save
-  end
+  Agent.create(name: "Karl", manager: false, password: 'password', region_id: @region.id)
+  Agent.create(name: "Almir", manager: false, password: 'password', region_id: @region.id)
 end
 
 def make_admin
-  DATA[:admins].each do |name|
-    Agent.create(name: name, manager: true, password: 'password', region_id: @region.id)
-  end
+  Agent.create(name: "KTA", manager: true, password: 'password', region_id: @region.id)
 end
 
 def make_region
